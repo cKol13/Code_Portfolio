@@ -1,6 +1,6 @@
 # Makefile for CSC300 PA#3 (zipf program)
 
-# Author: Andrew Stelter, Chris Kolegraf
+# Author: Partner, Chris Kolegraf
 # Class:  CSC300 Data Structures
 # Date:   Fall 2015
 
