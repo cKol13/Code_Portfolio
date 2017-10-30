@@ -14,7 +14,7 @@ using namespace std;
 typedef hashTable::hashNode hashNode;
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  * @author Chris Kolegraff
  *
  * @par Description:
@@ -45,7 +45,7 @@ bool getFileName(string& str, string& name, int argc, char** argv)
 }
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  * @author Chris Kolegraff
  *
  * @par Description:
@@ -63,7 +63,7 @@ void readFile(istream& file, vector<string>& lines)
 }
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  * @author Chris Kolegraff
  *
  * @par Description:
@@ -91,7 +91,7 @@ void processWords(vector<string>& lines, hashTable* table)
 }
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  *
  * @par Description:
  * Splits a line of text into words containing only alphabetic characters
@@ -169,7 +169,7 @@ int qCompareNodes(const void* f1, const void* f2)
 }
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  * @author Chris Kolegraff
  *
  * @par Description:
@@ -188,7 +188,7 @@ void sortHash(hashTable* table, hashTable::hashNode*& list)
 }
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  *
  * @par Description:
  * Outputs two (possibly three) files containing stats about the sorted words.\n
