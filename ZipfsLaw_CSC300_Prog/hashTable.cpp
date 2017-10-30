@@ -61,7 +61,7 @@ int hashTable::getTableSize()
 
 /**************************************************************************//**
  * @author Chris Kolegraff
- * @author Andrew Stelter
+ * @author Partner
  *
  * @par Description:
  * Finds a string in the hashtable using linear probing
@@ -91,7 +91,7 @@ int hashTable::find(string text)
 
 /**************************************************************************//**
  * @author Chris Kolegraff
- * @author Andrew Stelter
+ * @author Partner
  *
  * @par Description:
  * Hashes a word into the hashtable using linear probing
@@ -137,7 +137,7 @@ void hashTable::insertWord(string &&text, int freq)
 }
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  *
  * @par Description:
  * Removes a word from the hashtable and sets the frequency of that location to
@@ -262,7 +262,7 @@ int hashTable::hashWord(string& word)
 }
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  *
  * @par Description:
  * Starting from a location, walks through the hashtable until the given
@@ -294,7 +294,7 @@ int hashTable::linearProbe(int &start, std::string &word, bool lookup)
 }
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  * @author Chris Kolegraff
  *
  * @par Description:
@@ -324,7 +324,7 @@ hashTable::hashNode* hashTable::getTable()
 }
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  *
  * @par Description:
  * Gets the total number of words inserted into the table
@@ -337,7 +337,7 @@ int hashTable::getTotalWords()
 }
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  *
  * @par Description:
  * Gets the total number of unique words inserted into the table
