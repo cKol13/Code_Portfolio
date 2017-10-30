@@ -1,6 +1,0 @@
-This is a pile of nonsense, of no particular importance other than
-that of demonstrating how this program is supposed to work.
-Tra la la la la, la la la la.
-'
-'hello'
-'hello 'gov'na'
