@@ -8,7 +8,7 @@
  * @section Section M001: CSC 300
  *
  * @author Chris Kolegraff
- * @author Andrew Stelter
+ * @author Partner
  *
  * @date November 17, 2015
  *
@@ -81,7 +81,7 @@ using namespace std;
 
 
 /**************************************************************************//**
- * @author Andrew Stelter
+ * @author Partner
  * @author Chris Kolegraff
  *
  * @par Description:
