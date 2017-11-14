@@ -22,7 +22,7 @@ typedef __int128 fast128;
 // typedef fast64 fastLargestUsed;
 
 // Choose which data types you want to use
-typedef uint16_t  fastu8;
+typedef uint8_t  fastu8;
 typedef uint16_t fastu16;
 typedef uint32_t fastu32;
 typedef uint64_t fastu64;
@@ -101,10 +101,7 @@ public:
     // **************************************************************
     //                          Constructors
     // **************************************************************
-    //Fixed(const fast8 &num){fromInt(num);}
-    //Fixed(const fast16 &num){fromInt(num);}
     Fixed(const fast32 &num){fromInt(num);}
-    //Fixed(const fast64 &num){fromInt(num);}
     Fixed(){number = 0;}
     Fixed(const Fixed<INT, FRAC> &num){number = num.number;}
     Fixed(const double &num){ fromDouble(num);}
@@ -268,22 +265,10 @@ public:
     bool isPositive() const{ return number > 0;}
 
     // Equals Operators
-/*    Fixed<INT, FRAC>&operator=(const fast8 &num){
-        fromInt(num);
-        return *this;
-    }
-    Fixed<INT, FRAC>&operator=(const fast16 &num){
-        fromInt(num);
-        return *this;
-    }*/
     Fixed<INT, FRAC>&operator=(const fast32 &num){
         fromInt(num);
         return *this;
-    }/*
-    Fixed<INT, FRAC>&operator=(const fast64 &num){
-        fromInt(num);
-        return *this;
-    }*/
+    }
     Fixed<INT, FRAC>&operator=(const float &num){
         fromFloat(num);
         return *this;
@@ -314,41 +299,91 @@ public:
     }
 
     // Addition
-    template <typename Ltype, typename Rtype>
-    friend Fixed<INT, FRAC> operator+(const Ltype &L, const Rtype &R){
-        Fixed<INT, FRAC> left(L), right(R);
-        left.number += right.number;
+    template <typename Rtype>
+    friend Fixed<INT, FRAC> operator+(const Fixed<INT, FRAC> &L,
+                                      const Rtype &R){
+        Fixed<INT, FRAC> right(R);
+        right.number += L.number;
+        return right;
+    }
+    template <typename Ltype>
+    friend Fixed<INT, FRAC> operator+(const Ltype &L,
+                                      const Fixed<INT, FRAC> &R){
+        Fixed<INT, FRAC> left(L);
+        left.number += R.number;
+        return left;
+    }
+    friend Fixed<INT, FRAC> operator+(const Fixed<INT, FRAC> &L,
+                                      const Fixed<INT, FRAC> &R){
+        Fixed<INT, FRAC> left(L);
+        left.number += R.number;
         return left;
     }
     template <typename Rtype> void operator+=(const Rtype &R){
         Fixed<INT, FRAC> right(R);
         number += right.number;
     }
+    void operator+=(const Fixed<INT, FRAC> &R){
+        number += R.number;
+    }
     void increment(){
         number += static_cast<fixSize>(1) << FRAC;
     }
 
     // Subtraction
-    template <typename Ltype, typename Rtype>
-    friend Fixed<INT, FRAC> operator-(const Ltype &L, const Rtype &R){
-        Fixed<INT, FRAC> left(L), right(R);
-        left.number -= right.number;
+    template <typename Rtype>
+    friend Fixed<INT, FRAC> operator-(const Fixed<INT, FRAC> &L,
+                                      const Rtype &R){
+        Fixed<INT, FRAC> right(R);
+        right.number = L.number - right.number;
+        return right;
+    }
+    template <typename Ltype>
+    friend Fixed<INT, FRAC> operator-(const Ltype &L,
+                                      const Fixed<INT, FRAC> &R){
+        Fixed<INT, FRAC> left(L);
+        left.number -= R.number;
+        return left;
+    }
+    friend Fixed<INT, FRAC> operator-(const Fixed<INT, FRAC> &L,
+                                      const Fixed<INT, FRAC> &R){
+        Fixed<INT, FRAC> left(L);
+        left.number -= R.number;
         return left;
     }
     template <typename Rtype> void operator-=(const Rtype &R){
         Fixed<INT, FRAC> right(R);
         number -= right.number;
     }
+    void operator-=(const Fixed<INT, FRAC> &R){
+        number -= R.number;
+    }
     void decrement(){
         number -= static_cast<fixSize>(1) << FRAC;
     }
 
     // Multiplication
-    template <typename Ltype, typename Rtype>
-    friend Fixed<INT, FRAC> operator*(const Ltype &L, const Rtype &R){
-        Fixed<INT, FRAC> left(L), right(R);
+    template <typename Rtype>
+    friend Fixed<INT, FRAC> operator*(const Fixed<INT, FRAC> &L,
+                                      const Rtype &R){
+        Fixed<INT, FRAC> right(R);
+        right.number = (static_cast<dfixSize>(L.number) *
+                        static_cast<dfixSize>(right.number)) >> FRAC;
+        return right;
+    }
+    template <typename Ltype>
+    friend Fixed<INT, FRAC> operator*(const Ltype &L,
+                                      const Fixed<INT, FRAC> &R){
+        Fixed<INT, FRAC> left(L);
         left.number = (static_cast<dfixSize>(left.number) *
-                       static_cast<dfixSize>(right.number)) >> FRAC;
+                       static_cast<dfixSize>(R.number)) >> FRAC;
+        return left;
+    }
+    friend Fixed<INT, FRAC> operator*(const Fixed<INT, FRAC> &L,
+                                      const Fixed<INT, FRAC> &R){
+        Fixed<INT, FRAC> left(L);
+        left.number = (static_cast<dfixSize>(L.number) *
+                       static_cast<dfixSize>(R.number)) >> FRAC;
         return left;
     }
     template <typename Rtype> void operator*=(const Rtype &R){
@@ -356,21 +391,49 @@ public:
         number = (static_cast<dfixSize>(number) *
                   static_cast<dfixSize>(right.number)) >> FRAC;
     }
+    void operator*=(const Fixed<INT, FRAC> &R){
+        number = (static_cast<dfixSize>(number) *
+                  static_cast<dfixSize>(R.number)) >> FRAC;
+    }
 
     // Division
-    template <typename Ltype, typename Rtype>
-    friend Fixed<INT, FRAC> operator/(const Ltype &L, const Rtype &R){
+    template <typename Rtype>
+    friend Fixed<INT, FRAC> operator/(const Fixed<INT, FRAC> &L,
+                                      const Rtype &R){
         assert(R != 0);
-        Fixed<INT, FRAC> left(L), right(R);
+        Fixed<INT, FRAC> right(R);
+
+        right.number = (static_cast<dfixSize>(L.number) << FRAC) /
+                                            right.number;
+        return right;
+    }
+    template <typename Ltype>
+    friend Fixed<INT, FRAC> operator/(const Ltype &L,
+                                      const Fixed<INT, FRAC> &R){
+        assert(R.number != 0);
+        Fixed<INT, FRAC> left(L);
 
         left.number = (static_cast<dfixSize>(left.number) << FRAC) /
-                                            right.number;
+                                             R.number;
+        return left;
+    }
+    friend Fixed<INT, FRAC> operator/(const Fixed<INT, FRAC> &L,
+                                      const Fixed<INT, FRAC> &R){
+        assert(R.number != 0);
+        Fixed<INT, FRAC> left(L);
+
+        left.number = (static_cast<dfixSize>(L.number) << FRAC) /
+                                             R.number;
         return left;
     }
     template <typename Rtype> void operator/=(const Rtype &R){
-        assert(R != 0);
         Fixed<INT, FRAC> right(R);
+        assert(right != 0);
         number = (static_cast<dfixSize>(number) << FRAC) / right.number;
+    }
+    void operator/=(const Fixed<INT, FRAC> &R){
+        assert(R.number != 0);
+        number = (static_cast<dfixSize>(number) << FRAC) / R.number;
     }
 
 
@@ -424,6 +487,32 @@ public:
         return R.compareEQ(L);
     }
 
+    // Fixed compared to Fixed
+    friend bool operator>(const Fixed<INT, FRAC> &L,
+                          const Fixed<INT, FRAC> &R){
+        return L.compareGT(R);
+    }
+    friend bool operator<(const Fixed<INT, FRAC> &L,
+                          const Fixed<INT, FRAC> &R){
+        return L.compareLT(R);
+    }
+    friend bool operator>=(const Fixed<INT, FRAC> &L,
+                           const Fixed<INT, FRAC> &R){
+        return L.compareGE(R);
+    }
+    friend bool operator<=(const Fixed<INT, FRAC> &L,
+                           const Fixed<INT, FRAC> &R){
+        return L.compareLE(R);
+    }
+    friend bool operator!=(const Fixed<INT, FRAC> &L,
+                           const Fixed<INT, FRAC> &R){
+        return L.compareNE(R);
+    }
+    friend bool operator==(const Fixed<INT, FRAC> &L,
+                           const Fixed<INT, FRAC> &R){
+        return L.compareEQ(R);
+    }
+
 private:
     // Comparison functions
     bool compareGT(const Fixed<INT, FRAC> &R)const {
@@ -458,4 +547,3 @@ private:
 
 
 #endif // FIXEDPOINT_H
-
