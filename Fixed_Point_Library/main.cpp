@@ -1,4 +1,4 @@
-#include "FixedPoint.h"
+#include "FixedMath.h"
 #include <iostream>
 
 #include <math.h>
@@ -9,6 +9,9 @@ using namespace std;
 int main()
 {
     Fixed<10, 10> a(2.5);
-    cout << a << endl;
+    Fixed<10, 10> b(3.75);
+    cout << a + 3.0 << endl;
+
+    //cout << "exp(1.4) = " << Fixed_exp<30, 30>(1.4) << endl;
     return 0;
 }

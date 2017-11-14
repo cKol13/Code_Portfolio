@@ -1,3 +1,6 @@
+#ifndef FIXEDMATH_H
+#define FIXEDMATH_H
+
 #include "FixedPoint.h"
 #include <iostream>
 
@@ -24,7 +27,7 @@ Fixed<INT, FRAC> Fixed_exp(Fixed<INT, FRAC> x, fastu16 precision = 0){
     }
     return sum;
 }
-
+/*
 // http://www.claysturner.com/dsp/BinaryLogarithm.pdf
 template<fastu16 INT, fastu16 FRAC>
 Fixed<INT, FRAC> Fixed_Log2(Fixed<INT, FRAC> x, fastu16 precision = 0){
@@ -112,6 +115,7 @@ Fixed<INT, FRAC> Fixed_tan(const Fixed<INT, FRAC> &x){
     https://www.dsprelated.com/showarticle/1052.php
     Operates in range [-1, 1]
 */
+/*
 template<fastu16 INT, fastu16 FRAC>
 Fixed<INT, FRAC> Fixed_atan(const Fixed<INT, FRAC> &x){
     static const Fixed<INT, FRAC> CONST1(0.97239411), CONST2(-0.19194795);
@@ -154,3 +158,5 @@ Fixed<INT, FRAC> Fixed_atan2(const Fixed<INT, FRAC> &y,
     // Convert to degrees if necessary, and return
     return ret;
 }
+*/
+#endif // FIXEDMATH_H

@@ -6,7 +6,7 @@
 #include <stdint-gcc.h>
 #include <stdint.h>
 
-
+/*
 typedef uint_fast8_t  fastu8;
 typedef uint_fast16_t fastu16;
 typedef uint_fast32_t fastu32;
@@ -17,11 +17,11 @@ typedef int_fast16_t fast16;
 typedef int_fast32_t fast32;
 typedef int_fast64_t fast64;
 typedef __int128 fast128;
-
+*/
 // Used for the Fit function, maximum int word length for conversions
-typedef fast64 fastLargestUsed;
+// typedef fast64 fastLargestUsed;
 
-/* // Choose which data types you want to use
+// Choose which data types you want to use
 typedef uint16_t  fastu8;
 typedef uint16_t fastu16;
 typedef uint32_t fastu32;
@@ -32,7 +32,8 @@ typedef int16_t fast16;
 typedef int32_t fast32;
 typedef int64_t fast64;
 typedef __int128 fast128;
-*/
+
+typedef fast64 fastLargestUsed;
 
 /*
     The goal is to use the smallest data type possible to try to speed
@@ -267,7 +268,7 @@ public:
     bool isPositive() const{ return number > 0;}
 
     // Equals Operators
-    /*Fixed<INT, FRAC>&operator=(const fast8 &num){
+/*    Fixed<INT, FRAC>&operator=(const fast8 &num){
         fromInt(num);
         return *this;
     }
