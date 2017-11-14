@@ -102,8 +102,8 @@ public:
     // **************************************************************
     //Fixed(const fast8 &num){fromInt(num);}
     //Fixed(const fast16 &num){fromInt(num);}
-    //Fixed(const fast32 &num){fromInt(num);}
-    Fixed(const fast64 &num){fromInt(num);}
+    Fixed(const fast32 &num){fromInt(num);}
+    //Fixed(const fast64 &num){fromInt(num);}
     Fixed(){number = 0;}
     Fixed(const Fixed<INT, FRAC> &num){number = num.number;}
     Fixed(const double &num){ fromDouble(num);}
@@ -274,15 +274,15 @@ public:
     Fixed<INT, FRAC>&operator=(const fast16 &num){
         fromInt(num);
         return *this;
-    }
+    }*/
     Fixed<INT, FRAC>&operator=(const fast32 &num){
         fromInt(num);
         return *this;
-    }*/
+    }/*
     Fixed<INT, FRAC>&operator=(const fast64 &num){
         fromInt(num);
         return *this;
-    }
+    }*/
     Fixed<INT, FRAC>&operator=(const float &num){
         fromFloat(num);
         return *this;
