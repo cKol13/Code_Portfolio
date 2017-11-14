@@ -14,6 +14,6 @@ int main()
     cout << 3 + a << endl;
     cout << a + b + 3.0 << endl;
 
-    //cout << "exp(1.4) = " << Fixed_exp<30, 30>(1.4) << endl;
+    cout << "exp(1.4) = " << Fixed_exp<30, 30>(1.4) << endl;
     return 0;
 }
