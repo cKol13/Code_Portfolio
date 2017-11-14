@@ -3,6 +3,8 @@
 
 #include <cassert>
 #include <bitset>
+#include <stdint-gcc.h>
+#include <stdint.h>
 
 
 typedef uint_fast8_t  fastu8;
@@ -91,14 +93,16 @@ private:
             >::type
         >::type;
 
+    fixSize number = 0;
+
 public:
 
     // **************************************************************
     //                          Constructors
     // **************************************************************
-    Fixed(const fast8 &num){fromInt(num);}
-    Fixed(const fast16 &num){fromInt(num);}
-    Fixed(const fast32 &num){fromInt(num);}
+    //Fixed(const fast8 &num){fromInt(num);}
+    //Fixed(const fast16 &num){fromInt(num);}
+    //Fixed(const fast32 &num){fromInt(num);}
     Fixed(const fast64 &num){fromInt(num);}
     Fixed(){number = 0;}
     Fixed(const Fixed<INT, FRAC> &num){number = num.number;}
@@ -263,7 +267,7 @@ public:
     bool isPositive() const{ return number > 0;}
 
     // Equals Operators
-    Fixed<INT, FRAC>&operator=(const fast8 &num){
+    /*Fixed<INT, FRAC>&operator=(const fast8 &num){
         fromInt(num);
         return *this;
     }
@@ -274,7 +278,7 @@ public:
     Fixed<INT, FRAC>&operator=(const fast32 &num){
         fromInt(num);
         return *this;
-    }
+    }*/
     Fixed<INT, FRAC>&operator=(const fast64 &num){
         fromInt(num);
         return *this;
@@ -447,11 +451,11 @@ private:
         return ret;
     }
 
-    fixSize number = 0;
+    //fixSize number = 0;
 };
 
 
-
+#include "FixedPoint.cpp"
 
 #endif // FIXEDPOINT_H
 
