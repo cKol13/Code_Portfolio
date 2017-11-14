@@ -7,12 +7,10 @@
 #include <stdint.h>
 
 
-/* Library tested on x64 Windows (TDM-GCC-64) and
+/*
+ * Library tested on x64 Windows (TDM-GCC-64) and
  * on x86_64 Linux GNU GCC Red Hat 4.8.5-16 
- *
- * 
- * 
- * */
+ */
 
 
 
