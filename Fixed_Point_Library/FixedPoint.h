@@ -455,7 +455,6 @@ private:
 };
 
 
-#include "FixedPoint.cpp"
 
 #endif // FIXEDPOINT_H
 
