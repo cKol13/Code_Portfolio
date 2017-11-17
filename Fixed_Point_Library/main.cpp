@@ -1,19 +1,16 @@
-#include "FixedMath.h"
+#include "FixedPoint.h"
 #include <iostream>
 
-#include <math.h>
-#include <cmath>
 
 using namespace std;
 
 int main()
 {
-    Fixed<10, 10> a(2.5);
-    Fixed<10, 10> b(3.75);
-    cout << a + 3.0 << endl;
-    cout << 3 + a << endl;
-    cout << a + b + 3.0 << endl;
+    Fixed<10, 5> a = 123.23, b = 32, sum = a + b;
+    cout << a << " + " << b << " = " << sum.toString(5) << endl;
 
-    cout << "exp(1.4) = " << Fixed_exp<30, 30>(1.4) << endl;
+    Fixed<16, 16, UNSIGNED> c = 13.875, d = 32.25, product = c * d;
+    cout << c << " * " << d << " = " << product.toString(5) << endl;
+
     return 0;
 }
