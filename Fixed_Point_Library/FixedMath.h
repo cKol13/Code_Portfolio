@@ -4,14 +4,22 @@
 #include "FixedPoint.h"
 #include <iostream>
 
-const static Fixed<2, 61> FIXED_PI(3.14159265358979323846264);
-const static Fixed<2, 61> FIXED_PIDIV2 = FIXED_PI / 2;
+#if ENABLE_64_BIT_USE == 1
+    const static Fixed<2, 61> FIXED_PI(3.14159265358979323846264);
+    const static Fixed<2, 61> FIXED_PIDIV2 = FIXED_PI / 2;
+#elif ENABLE_32_BIT_USE == 1
+    const static Fixed<2, 29> FIXED_PI(3.14159265358979323846264);
+    const static Fixed<2, 29> FIXED_PIDIV2 = FIXED_PI / 2;
+#else
+    const static Fixed<2, 13> FIXED_PI(3.14159f);
+    const static Fixed<2, 13> FIXED_PIDIV2 = FIXED_PI / 2.0;
+#endif // ENABLE_64_BIT_USE
 
 // Taylor Series expansion of e^x method
 template<fastu16 INT, fastu16 FRAC>
-Fixed<INT, FRAC> Fixed_exp(Fixed<INT, FRAC> x, fastu16 precision = 0){
+Fixed<INT, FRAC> Fixed_exp(Fixed<INT, FRAC> x, fast32 precision = 0){
     Fixed<INT, FRAC> sum(1 + x), iteration(x);
-    fastu16 n = 2;
+    fast32 n = 2;
 
     if(precision > 0){
         for(; n < precision && iteration.isNonZero(); n++){
@@ -111,10 +119,10 @@ Fixed<INT, FRAC> Fixed_tan(const Fixed<INT, FRAC> &x){
     return Fixed_sin<INT, FRAC>(x) / cosVal;
 }
 
-/*
-    https://www.dsprelated.com/showarticle/1052.php
-    Operates in range [-1, 1]
-*/
+
+//    https://www.dsprelated.com/showarticle/1052.php
+//    Operates in range [-1, 1]
+
 template<fastu16 INT, fastu16 FRAC>
 Fixed<INT, FRAC> Fixed_atan(const Fixed<INT, FRAC> &x){
     static const Fixed<INT, FRAC> CONST1(0.97239411), CONST2(-0.19194795);
@@ -154,7 +162,6 @@ Fixed<INT, FRAC> Fixed_atan2(const Fixed<INT, FRAC> &y,
             ret = -FIX_PIDIV2 - Fixed_atan<INT, FRAC>(x / y);
     }
 
-    // Convert to degrees if necessary, and return
     return ret;
 }
 

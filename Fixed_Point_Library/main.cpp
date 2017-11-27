@@ -1,16 +1,28 @@
 #include "FixedPoint.h"
+#include "FxPtTests.h"
 #include <iostream>
 
 
-using namespace std;
 
 int main()
 {
-    Fixed<10, 5> a = 123.23, b = 32, sum = a + b;
-    cout << a << " + " << b << " = " << sum.toString(5) << endl;
+    //run8BitFixedPointTests(std::cout);
+    //run16BitFixedPointTests(std::cout);
 
-    Fixed<16, 16, UNSIGNED> c = 13.875, d = 32.25, product = c * d;
-    cout << c << " * " << d << " = " << product.toString(5) << endl;
+
+    Fixed<14, 18, UNSIGNED> x = 541.515625, y = 23.375;
+    std::cout << "x = " << x << ", y = " << y << std::endl;
+    std::cout << "x + y = " << x + y << std::endl;
+    std::cout << "x - y = " << x - y << std::endl;
+    std::cout << "x * y = " << x * y << std::endl;
+    std::cout << "x / y = " << x / y << std::endl;
+
+    Fixed<30, 33> a = -12352.5, b = 3125.533203125;
+    std::cout << "a = " << a << ", b = " << b << std::endl;
+    std::cout << "a + b = " << a + b << std::endl;
+    std::cout << "a - b = " << a - b << std::endl;
+    std::cout << "a * b = " << a * b << std::endl;
+    std::cout << "a / b = " << a / b << std::endl;
 
     return 0;
 }
